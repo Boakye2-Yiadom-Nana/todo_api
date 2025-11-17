@@ -7,15 +7,15 @@ class Todo < ApplicationRecord
 
     validate :title_cannot_be_completed_if_empty
 
-    
-end
+    def completed?
+        completed
+    end
 
-def completed?
-    completed
-end
+    private
 
-def title_cannot_be_completed_if_empty
-    if title.blank? && completed?
-        errors.add(:title, "cannot be empty if the todo is marked as completed")
+    def title_cannot_be_completed_if_empty
+        if title.blank? && completed?
+            errors.add(:title, "cannot be empty if the todo is marked as completed")
+        end
     end
 end

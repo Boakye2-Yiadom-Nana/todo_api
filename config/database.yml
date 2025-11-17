@@ -26,7 +26,13 @@ test:
 production:
   primary:
     <<: *default
-    database: storage/production.sqlite3
+    adapter: postgresql
+    encoding: unicode
+    database: <%= ENV.fetch("DATABASE_NAME") { "todo_api_production" } %>
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] %>
+    port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
   cache:
     <<: *default
     database: storage/production_cache.sqlite3
